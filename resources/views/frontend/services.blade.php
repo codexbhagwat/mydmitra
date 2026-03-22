@@ -11,7 +11,7 @@
         <h1 style="font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;margin-bottom:8px;">
             Browse Our Services
         </h1>
-        <p style="color:rgba(255,255,255,0.55);font-size:15px;">Apply online, pay securely, and track your application in real time.</p>
+        <p style="#1a3a6b;;font-size:15px;">Apply online, pay securely, and track your application in real time.</p>
     </div>
 </div>
 

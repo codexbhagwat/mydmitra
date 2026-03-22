@@ -58,7 +58,7 @@
 
 @yield('content')
 
-<footer style="background:var(--dark);color:rgba(255,255,255,0.5);padding:28px 0;margin-top:60px;">
+<footer style="background:#1a3a6b;;color:rgba(255,255,255,0.5);padding:28px 0;margin-top:60px;">
     <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
         <div>
             <span style="font-family:'Syne',sans-serif;font-weight:800;color:#fff;font-size:17px;">

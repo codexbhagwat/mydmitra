@@ -26,16 +26,16 @@
 
                 <div class="d-flex gap-4 mt-5 flex-wrap">
                     <div>
-                        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#fff;">500+</div>
-                        <div style="font-size:12.5px;color:rgba(255,255,255,0.5);">Applications Processed</div>
+                        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#1a3a6b;">500+</div>
+                        <div style="font-size:12.5px;">Services Available</div>
                     </div>
                     <div>
-                        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#fff;">8+</div>
-                        <div style="font-size:12.5px;color:rgba(255,255,255,0.5);">Services Available</div>
+                        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:green;">10K+</div>
+                        <div style="font-size:12.5px;">Happy Customers</div>
                     </div>
                     <div>
                         <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--orange);">100%</div>
-                        <div style="font-size:12.5px;color:rgba(255,255,255,0.5);">Secure & Private</div>
+                        <div style="font-size:12.5px;">Years Experience</div>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 Our Services
             </div>
             <h2 style="font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:10px;">Everything You Need, Online</h2>
-            <p style="color:var(--grey);font-size:15px;max-width:500px;margin:0 auto;">
+            <p style="color:#1a3a6b;font-size:15px;max-width:500px;margin:0 auto;">
                 From identity documents to financial services — apply, pay, and track in minutes.
             </p>
         </div>
@@ -91,11 +91,11 @@
 </section>
 
 {{-- HOW IT WORKS --}}
-<section style="background:var(--dark);padding:70px 0;">
+<section style="padding:70px 0;">
     <div class="container">
         <div class="text-center mb-5">
             <h2 style="font-size:clamp(24px,3vw,36px);font-weight:800;color:#fff;">How It Works</h2>
-            <p style="color:rgba(255,255,255,0.5);font-size:15px;margin-top:8px;">Three simple steps to complete your application</p>
+            <p style="color:#1a3a6b;font-size:15px;margin-top:8px;">Three simple steps to complete your application</p>
         </div>
         <div class="row g-4 justify-content-center">
             @foreach([
@@ -108,8 +108,8 @@
                     <i class="bi {{ $step[0] }}"></i>
                 </div>
                 <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--orange);margin-bottom:6px;">STEP {{ $step[1] }}</div>
-                <h5 style="font-size:16px;color:#fff;font-weight:700;margin-bottom:8px;">{{ $step[2] }}</h5>
-                <p style="font-size:13.5px;color:rgba(255,255,255,0.5);">{{ $step[3] }}</p>
+                <h5 style="font-size:16px;#1a3a6b;font-weight:700;margin-bottom:8px;">{{ $step[2] }}</h5>
+                <p style="font-size:13.5px;color:#1a3a6b;">{{ $step[3] }}</p>
             </div>
             @endforeach
         </div>

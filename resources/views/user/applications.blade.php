@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
         <h4 style="font-size:18px;font-weight:800;margin:0;">My Applications</h4>
-        <p style="color:var(--grey);font-size:13px;margin-top:2px;">Track all your service applications</p>
+        <p style="#1a3a6b;font-size:13px;margin-top:2px;">Track all your service applications</p>
     </div>
     <a href="{{ route('services') }}" class="btn-orange">
         <i class="bi bi-plus-lg"></i> New Application
