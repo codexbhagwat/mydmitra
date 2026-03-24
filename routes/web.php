@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\ServiceController as AdminService;
 use App\Http\Controllers\Admin\ApplicationController as AdminApplication;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\User\ApplicationController as UserApplication;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\ServiceController;
+
 
 // ── Frontend
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -54,4 +57,39 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/applications',                        [AdminApplication::class, 'index'])->name('applications.index');
     Route::patch('/applications/{application}/status', [AdminApplication::class, 'updateStatus'])->name('applications.status');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+
+    // Browse active services
+    Route::get('/services', [ServiceController::class, 'index'])
+        ->name('services.index');
+
+    // Application form
+    Route::get('/services/{service}', [ServiceController::class, 'show'])
+        ->name('services.show');
+
+    // Handle form submission
+    Route::post('/services/{service}/submit', [ServiceController::class, 'submit'])
+        ->name('services.submit');
+
+    // "My Applications" list — shows all applications the user submitted
+    Route::get('/my-applications', [ServiceController::class, 'myApplications'])
+        ->name('services.my-applications');
+
+    // Single application detail page
+    Route::get('/my-applications/{app}', [ServiceController::class, 'applicationDetail'])
+        ->name('services.application');
+});
+
+// ── Admin routes ──────────────────────────────────────────────
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+    Route::resource('services', AdminServiceController::class);
+
+    // Quick toggle active/inactive from the index table
+    Route::post('services/{service}/toggle', [AdminServiceController::class, 'toggle'])
+        ->name('services.toggle');
 });

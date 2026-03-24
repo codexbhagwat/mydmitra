@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="mb-4">
-    <a href="{{ route('services') }}" style="color:var(--grey);font-size:13px;">
+    <a href="{{ route('services.index') }}" style="color:var(--grey);font-size:13px;">
         <i class="bi bi-arrow-left"></i> Back to Services
     </a>
 </div>

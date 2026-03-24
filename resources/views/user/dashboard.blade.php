@@ -75,7 +75,7 @@
             <div style="text-align:center;padding:40px 20px;">
                 <div style="font-size:40px;margin-bottom:12px;">📋</div>
                 <p style="color:var(--grey);font-size:14px;margin-bottom:16px;">You haven't applied for any services yet.</p>
-                <a href="{{ route('services') }}" class="btn-orange">
+                <a href="{{ route('services.index') }}" class="btn-orange">
                     <i class="bi bi-grid"></i> Browse Services
                 </a>
             </div>
@@ -83,7 +83,7 @@
 
         @if($recentApplications->count())
         <div style="border-top:1px solid var(--grey-light);margin-top:8px;padding-top:16px;">
-            <a href="{{ route('services') }}" class="btn-outline-orange w-100" style="justify-content:center;">
+            <a href="{{ route('services.index') }}" class="btn-outline-orange w-100" style="justify-content:center;">
                 <i class="bi bi-plus-lg"></i> Apply for a New Service
             </a>
         </div>

@@ -10,7 +10,7 @@
   <style>
     /* ── TOP BAR ── */
     .topbar {
-        
+
       background: #1a3a6b;
       color: #fff;
       font-size: 13px;
@@ -196,7 +196,7 @@
       {{-- Desktop Nav Links --}}
       <div class="d-none d-lg-flex align-items-center gap-1">
         <!-- <a href="{{ route('home') }}" class="nav-link">Home</a> -->
-        <a href="{{ route('services') }}" class="nav-link">Services</a>
+        <a href="{{ route('services.index') }}" class="nav-link">Services</a>
         <a href="#contact" class="nav-link">Government</a>
         <a href="#contact" class="nav-link">Banking</a>
           <a href="#contact" class="nav-link">Document</a>
@@ -242,10 +242,10 @@
       </button>
     </div>
 
-    {{-- Mobile Nav Collapse --}}
+    {{--  Nav Collapse --}}
     <div class="nav-collapse d-lg-none" id="mobileNav" style="background:#fff;border-top:1px solid #e5e7eb;padding:12px 16px;">
       <a href="{{ route('home') }}" class="nav-link">Home</a>
-      <a href="{{ route('services') }}" class="nav-link">Services</a>
+      <a href="{{ route('services.index') }}" class="nav-link">Services</a>
       <a href="#contact" class="nav-link">Contact</a>
       <hr style="border-color:#e5e7eb;margin:8px 0;">
       @auth
@@ -310,7 +310,7 @@
         <h6>Quick Links</h6>
         <ul>
           <li><a href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('services') }}">Services</a></li>
+          <li><a href="{{ route('services.index') }}">Services</a></li>
           <li><a href="#contact">Contact</a></li>
           @guest
             <li><a href="{{ route('login') }}">Login</a></li>
