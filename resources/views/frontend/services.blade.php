@@ -3,19 +3,19 @@
 
 @section('content')
 
-<div style="background:var(--dark);padding:50px 0 40px;">
+<div style="background:var(--dark);padding:35px 0 40px;">
     <div class="container">
-        <div style="display:inline-block;background:rgba(255,122,0,0.15);color:var(--orange);padding:5px 14px;border-radius:20px;font-size:12.5px;font-weight:700;margin-bottom:14px;">
+        <div style="display:inline-block;background:rgba(255,122,0,0.15);color:var(--orange);padding:5px 14px;border-radius:20px;font-size:13.5px;font-weight:700;margin-bottom:14px;">
             All Services
         </div>
-        <h1 style="font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;margin-bottom:8px;">
+        <h1 style="font-family:'Syne',sans-serif;font-size:50px;font-weight:700;color:#000;margin-bottom:8px;">
             Browse Our Services
         </h1>
         <p style="#1a3a6b;;font-size:15px;">Apply online, pay securely, and track your application in real time.</p>
     </div>
 </div>
 
-<section style="padding:56px 0;">
+<section style="padding:11px 0;">
     <div class="container">
         <div class="row g-4">
             @forelse($services as $service)
@@ -26,7 +26,10 @@
                     </div>
                     <h5>{{ $service->name }}</h5>
                     <p>{{ $service->description }}</p>
-                    <div class="service-price">₹{{ number_format($service->price, 0) }}</div>
+                    <div class="service-price" style="
+    margin-bottom: 6px;
+    font-size: 19px;
+">₹{{ number_format($service->price, 0) }}</div>
                     @auth
                         <a href="{{ route('user.apply', $service) }}" class="btn-orange w-100" style="justify-content:center;">
                             Apply Now <i class="bi bi-arrow-right"></i>
