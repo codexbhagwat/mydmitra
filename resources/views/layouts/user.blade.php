@@ -24,7 +24,7 @@
         <a href="{{ route('user.applications') }}" class="nav-link {{ request()->routeIs('user.applications') ? 'active' : '' }}">
             <i class="bi bi-file-earmark-text"></i> My Applications
         </a>
-        <a href="{{ route('services') }}" class="nav-link">
+        <a href="{{ route('services.index') }}" class="nav-link">
             <i class="bi bi-grid"></i> Services
         </a>
 

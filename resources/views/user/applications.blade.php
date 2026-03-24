@@ -8,7 +8,7 @@
         <h4 style="font-size:18px;font-weight:800;margin:0;">My Applications</h4>
         <p style="#1a3a6b;font-size:13px;margin-top:2px;">Track all your service applications</p>
     </div>
-    <a href="{{ route('services') }}" class="btn-orange">
+    <a href="{{ route('services.index') }}" class="btn-orange">
         <i class="bi bi-plus-lg"></i> New Application
     </a>
 </div>
@@ -46,7 +46,7 @@
                         <td colspan="3" style="text-align:center;padding:50px;color:var(--grey);">
                             <div style="font-size:36px;margin-bottom:10px;">📭</div>
                             <p style="margin-bottom:14px;">No applications yet.</p>
-                            <a href="{{ route('services') }}" class="btn-orange">Browse Services</a>
+                            <a href="{{ route('services.index') }}" class="btn-orange">Browse Services</a>
                         </td>
                     </tr>
                     @endforelse

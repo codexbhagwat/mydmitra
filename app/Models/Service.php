@@ -2,16 +2,49 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'icon', 'is_active'];
+    use HasFactory;
 
-    protected $casts = ['is_active' => 'boolean', 'price' => 'decimal:2'];
+    protected $fillable = [
+        'name',
+        'form_title',
+        'description',
+        'price',
+        'icon',
+        'is_active',
+        'fields',
+        'required_documents',
+    ];
 
+    /**
+     * Cast JSON columns to arrays automatically.
+     * This is the KEY fix — without this, $service->fields is a plain
+     * string and @foreach fails silently (or throws).
+     */
+    protected $casts = [
+        'fields'             => 'array',
+        'required_documents' => 'array',
+        'price'              => 'decimal:2',
+        'is_active'          => 'boolean',
+    ];
+
+    // ── Scopes ────────────────────────────────────────────────
+
+    /** Only services marked active (used in frontend query). */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    // ── Relationships ─────────────────────────────────────────
+
+    /** All applications submitted for this service. */
     public function applications()
     {
-        return $this->hasMany(Application::class);
+        return $this->hasMany(ServiceApplication::class);
     }
 }
