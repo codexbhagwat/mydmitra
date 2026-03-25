@@ -62,6 +62,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // ── Service Routes
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index'); // ✅ ADD THIS
+
 Route::middleware('auth')->group(function () {
     Route::get('/services/{service}',        [ServiceController::class, 'show'])->name('services.show');
     Route::post('/services/{service}/submit',[ServiceController::class, 'submit'])->name('services.submit');

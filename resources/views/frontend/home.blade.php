@@ -295,6 +295,35 @@
     .enquiry-card       { padding: 14px 12px; }
     .cinfo-icon         { width: 30px; height: 30px; font-size: 13px; }
   }
+
+  .quick-card-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.quick-card {
+    position: relative;
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    z-index: 2;
+}
+
+/* Tilted shadow layer */
+.quick-card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 28px;
+    width: 78%;
+    height: 85%;
+    background: #fff;
+    border-radius: 20px;
+    transform: rotate(-7deg);
+    z-index: 1;
+}
+
+/* Optional second layer for more depth */
   
 </style>
 @endpush
@@ -323,7 +352,7 @@
           hassle-free services for citizens.
         </p>
         <div class="d-flex gap-3 flex-wrap">
-          <a href="{{ route('services') }}" class="btn-view-all">
+          <a href="{{ route('services.index') }}" class="btn-view-all">
             View All Services <i class="bi bi-arrow-right"></i>
           </a>
           @auth
@@ -384,7 +413,7 @@
               <span class="qs-days">Same Day</span>
             </div>
 
-            <a href="{{ route('services') }}" class="btn-view-all-card">
+            <a href="{{ route('services.index') }}" class="btn-view-all-card">
               View All Services
             </a>
           </div>
@@ -434,7 +463,7 @@
 
     @if($services->count() >= 6)
     <div class="text-center mt-5">
-      <a href="{{ route('services') }}" class="btn-view-all" style="margin: 0 auto;">
+      <a href="{{ route('services.index') }}" class="btn-view-all" style="margin: 0 auto;">
         View All Services <i class="bi bi-arrow-right"></i>
       </a>
     </div>
@@ -611,7 +640,7 @@
         <h6 style="color:#fff;font-weight:700;font-size:13px;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:18px;">Quick Links</h6>
         <ul style="list-style:none;padding:0;">
           <li style="margin-bottom:10px;"><a href="{{ route('home') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Home</a></li>
-          <li style="margin-bottom:10px;"><a href="{{ route('services') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Services</a></li>
+          <li style="margin-bottom:10px;"><a href="{{ route('services.index') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Services</a></li>
           <li style="margin-bottom:10px;"><a href="#contact" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Contact</a></li>
           @guest
           <li style="margin-bottom:10px;"><a href="{{ route('login') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Login</a></li>

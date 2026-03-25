@@ -26,7 +26,7 @@
                 <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;">{{ $service->name }}</div>
                 <div style="font-size:13px;color:var(--grey-dark);margin-top:2px;">{{ $service->description }}</div>
             </div>
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--orange);flex-shrink:0;">
+            <div style="font-weight:700;font-size:22px;color:var(--orange);flex-shrink:0;">
                 ₹{{ number_format($service->price, 0) }}
             </div>
         </div>

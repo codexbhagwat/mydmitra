@@ -56,17 +56,16 @@
         </form>
     </div>
 </aside>
-
 <div class="main-content">
     <header class="topbar">
         <div class="d-flex align-items-center gap-3">
             <button class="btn btn-sm d-md-none" onclick="document.getElementById('sidebar').classList.toggle('open')">
                 <i class="bi bi-list" style="font-size:20px;"></i>
             </button>
-            <span class="topbar-title">@yield('page-title', 'Dashboard')</span>
+            <span class="topbar-title" style="margin-left: 19px; color: #ead4a4;">@yield('page-title', 'Dashboard')</span>
         </div>
         <div class="topbar-right">
-            <span style="font-size:13px; color:var(--grey);">
+            <span style="font-size:13px; color:var(--grey); margin-left:19px;">
                 Welcome, <strong style="color:var(--dark);">{{ auth()->user()->first_name }}</strong>
             </span>
         </div>

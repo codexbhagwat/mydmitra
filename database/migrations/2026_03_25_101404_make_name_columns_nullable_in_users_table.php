@@ -9,17 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id')->nullable()->unique()->after('id');
-            $table->string('avatar')->nullable()->after('google_id');
-            $table->string('password')->nullable()->change();
+            $table->string('first_name')->nullable()->change();
+            $table->string('last_name')->nullable()->change();
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['google_id', 'avatar']);
-            $table->string('password')->nullable(false)->change();
+            $table->string('first_name')->nullable(false)->change();
+            $table->string('last_name')->nullable(false)->change();
         });
     }
 };
