@@ -30,7 +30,7 @@
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;">
                 <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:15px;">Total</span>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--orange);">
+                <span style="font-weight:700;font-size:22px;color:var(--orange);">
                     ₹{{ number_format($application->service->price, 0) }}
                 </span>
             </div>

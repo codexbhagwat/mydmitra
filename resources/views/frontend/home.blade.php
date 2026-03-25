@@ -296,6 +296,35 @@
     .cinfo-icon         { width: 30px; height: 30px; font-size: 13px; }
   }
 
+  .quick-card-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.quick-card {
+    position: relative;
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    z-index: 2;
+}
+
+/* Tilted shadow layer */
+.quick-card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    left: 28px;
+    width: 78%;
+    height: 85%;
+    background: #fff;
+    border-radius: 20px;
+    transform: rotate(-7deg);
+    z-index: 1;
+}
+
+/* Optional second layer for more depth */
+  
 </style>
 @endpush
 
