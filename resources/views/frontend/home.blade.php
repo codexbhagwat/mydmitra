@@ -641,7 +641,7 @@
         <ul style="list-style:none;padding:0;">
           <li style="margin-bottom:10px;"><a href="{{ route('home') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Home</a></li>
           <li style="margin-bottom:10px;"><a href="{{ route('services.index') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Services</a></li>
-          <li style="margin-bottom:10px;"><a href="#contact" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Contact</a></li>
+          <li style="margin-bottom:10px;"><a href="contact" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Contact</a></li>
           @guest
           <li style="margin-bottom:10px;"><a href="{{ route('login') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Login</a></li>
           <li style="margin-bottom:10px;"><a href="{{ route('register') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Register</a></li>

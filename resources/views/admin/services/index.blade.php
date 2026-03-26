@@ -57,7 +57,7 @@
                 @foreach($services as $service)
                 <tr style="border-bottom:1px solid var(--grey-light);transition:background .1s;"
                     onmouseover="this.style.background='var(--bg-soft)'"
-                    onmouseout="this.style.background=''">>
+                    onmouseout="this.style.background=''">
 
                     {{-- Service name + icon --}}
                     <td style="padding:14px 18px;">
@@ -84,7 +84,7 @@
                     {{-- Price --}}
                     <td style="padding:14px 12px;">
                         @if($service->price > 0)
-                            <span style="font-family:'Syne',sans-serif;font-weight:800;
+                            <span style="font-weight:700;
                                          color:var(--orange);font-size:14px;">
                                 ₹{{ number_format($service->price, 0) }}
                             </span>

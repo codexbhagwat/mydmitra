@@ -4,33 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Service extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'form_title',
-        'description',
-        'price',
-        'icon',
-        'is_active',
-        'fields',
-        'required_documents',
-    ];
+protected $fillable = [
+    'name',
+    // 'form_title',
+    'description',
+    'price',
+    'icon',
+    'is_active',
+    'fields_json',    // ✅ DB column
+    'documents_json', // ✅ DB column
+];
 
     /**
      * Cast JSON columns to arrays automatically.
      * This is the KEY fix — without this, $service->fields is a plain
      * string and @foreach fails silently (or throws).
      */
-    protected $casts = [
-        'fields'             => 'array',
-        'required_documents' => 'array',
-        'price'              => 'decimal:2',
-        'is_active'          => 'boolean',
-    ];
+protected $casts = [
+    'fields_json'    => 'array', // ✅
+    'documents_json' => 'array', // ✅
+    'price'          => 'decimal:2',
+    'is_active'      => 'boolean',
+];
 
     // ── Scopes ────────────────────────────────────────────────
 
