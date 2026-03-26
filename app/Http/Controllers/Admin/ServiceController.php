@@ -21,18 +21,26 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'name'        => 'required|string|max:150',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'icon'        => 'required|string|max:50',
-            'is_active'   => 'boolean',
+            'icon'        => 'nullable|string|max:100',  // ✅ add validation
         ]);
 
-        $data['is_active'] = $request->has('is_active');
-        Service::create($data);
+    Service::create([
+        'name'           => $request->name,
+        // 'form_title'     => $request->form_title ?: $request->name,
+        'description'    => $request->description,
+        'price'          => $request->price ?? 0,
+        'icon'           => $request->icon ?: null,   // ✅ YE LINE ADD KARO
+        'is_active'      => $request->has('is_active') ? 1 : 0,
+        'fields_json'    => $request->fields,
+        'documents_json' => $request->required_documents,
+    ]);
 
-        return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
+        return redirect()->route('admin.services.index')
+                        ->with('success', 'Service created successfully.');
     }
 
     public function edit(Service $service)
@@ -42,22 +50,32 @@ class ServiceController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $data = $request->validate([
+        $request->validate([
             'name'        => 'required|string|max:150',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'icon'        => 'required|string|max:50',
+            'icon'        => 'nullable|string|max:100',  // ✅ add validation
         ]);
 
-        $data['is_active'] = $request->has('is_active');
-        $service->update($data);
+    $service->update([
+        'name'           => $request->name,
+        // 'form_title'     => $request->form_title ?: $request->name,
+        'description'    => $request->description,
+        'price'          => $request->price ?? 0,
+        'icon'           => $request->icon ?: null,   // ✅ YE LINE ADD KARO
+        'is_active'      => $request->has('is_active') ? 1 : 0,
+        'fields_json'    => $request->fields,
+        'documents_json' => $request->required_documents,
+    ]);
 
-        return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
+        return redirect()->route('admin.services.index')
+                        ->with('success', 'Service updated successfully.');
     }
 
     public function destroy(Service $service)
     {
         $service->delete();
-        return redirect()->route('admin.services.index')->with('success', 'Service deleted.');
+        return redirect()->route('admin.services.index')
+                         ->with('success', 'Service deleted.');
     }
 }

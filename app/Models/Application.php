@@ -6,7 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $fillable = ['user_id', 'service_id', 'status', 'notes'];
+    protected $fillable = [
+        'user_id', 
+        'service_id', 
+        'status', 
+        'notes',
+        'fields_data',    // ← add this
+        'documents_data', // ← add this
+    ];
+
+    protected $casts = [
+        'fields_data'    => 'array', // ← add this
+        'documents_data' => 'array', // ← add this
+    ];
 
     public function user()
     {
