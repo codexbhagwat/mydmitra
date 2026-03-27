@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\User\DashboardController as UserDashboard;
 use App\Http\Controllers\User\ApplicationController as UserApplication;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\GovernmentController;
+use App\Http\Controllers\ContactController;
 
 // ── Frontend
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -70,3 +72,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-applications',           [ServiceController::class, 'myApplications'])->name('services.my-applications');
     Route::get('/my-applications/{app}',     [ServiceController::class, 'applicationDetail'])->name('services.application');
 });
+
+// Goverment 
+Route::get('/government-services', [GovernmentController::class, 'index'])->name('government.index');
+Route::get('/government/apply/{service}', [GovernmentController::class, 'apply'])->name('services.apply');
+Route::get('/contact', fn() => view('contact'))->name('contact');
+
+// Contact Routes
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+
+// Banking page route
+Route::get('/banking', function () {
+    return view('banking');
+})->name('banking.index');
+
+// Document page
+Route::get('/documents', function () {
+    return view('document');
+})->name('document.index');

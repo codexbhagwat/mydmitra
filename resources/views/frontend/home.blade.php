@@ -70,30 +70,24 @@
   /* Quick Card */
   .quick-card-wrapper {
     position: relative;
-    display: flex; align-items: center; justify-content: flex-end;
-    width: 100%; padding: 30px 0 30px 30px;
-  }
-  .qc-blob {
-    position: absolute; border-radius: 50%; z-index: 0; pointer-events: none;
-  }
-  .qc-blob-1 {
-    width: 220px; height: 200px;
-    background: #c8d8ee; opacity: 0.55;
-    top: -10px; right: -10px;
-    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-  }
-  .qc-blob-2 {
-    width: 180px; height: 160px;
-    background: #b8cce0; opacity: 0.45;
-    bottom: 0; left: 10px;
-    border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+    display: inline-block;
   }
   .quick-card {
-    position: relative; z-index: 1;
-    background: #fff; border-radius: 16px;
+    position: relative; z-index: 2;
+    background: #fff; border-radius: 18px;
     box-shadow: 0 4px 32px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
     padding: 28px 28px 24px; width: 80%;
     border: 1px solid #a5a12a99;
+  }
+  .quick-card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 30px; left: 28px;
+    width: 78%; height: 85%;
+    background: #fff;
+    border-radius: 20px;
+    transform: rotate(-7deg);
+    z-index: 1;
   }
   .quick-card-title {
     font-size: 18px; font-weight: 700;
@@ -164,63 +158,124 @@
   .feature-card h6 { font-weight: 700; font-size: 15.5px; margin-bottom: 10px; color: #111827; }
   .feature-card p  { font-size: 13.5px; color: #6b7280; line-height: 1.65; }
 
-  /* ── HOW IT WORKS ── */
-  /* .how-section { background: #dcd7c957; padding: 64px 0; }
-  .step-icon {
-    width: 60px; height: 60px; border-radius: 16px;
-    background: rgba(26,58,107,0.10);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px; color: #1a3a6b; margin: 0 auto 16px;
-  } */
+  /* ── STEP NUM ── */
   .step-num {
     font-size: 15px; font-weight: 700; letter-spacing: 1.5px;
     color: #ea580c; margin-bottom: 6px; text-transform: uppercase;
   }
 
-  /* ── CONTACT SECTION ── */
-  .contact-section { background: #dcd7c957; padding: 64px 0; }
-  .contact-info-card {
-      background: #fff; border-radius: 19px;
-      padding: 23px 30px; border: 1px solid #e5e7eb;
-      border: 1px solid #a5a12a99;
+  /* ── CTA BANNER ── */
+  .cta-section {
+    background: #1a3a6b;
+    padding: 70px 0;
+    position: relative;
+    overflow: hidden;
   }
-  .contact-info-card h5 { font-weight: 700; font-size: 17px; margin-bottom: 4px; color: #111827; }
-  .cinfo-sub { font-size: 13px; color: #9ca3af; margin-bottom: 24px; }
-  .cinfo-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-  .cinfo-icon {
-    width: 40px; height: 40px; flex-shrink: 0;
-    background: #e8eef8; border-radius: 10px;
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 220px; height: 220px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .cta-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 5px 14px 5px 10px;
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .cta-title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+  }
+  .cta-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.7;
+    max-width: 500px;
+    margin-bottom: 32px;
+  }
+  .btn-cta-white {
+    background: #fff; color: #1a3a6b;
+    border: none; padding: 12px 26px;
+    border-radius: 8px; font-size: 14.5px; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; transition: all .2s;
+    text-decoration: none;
+  }
+  .btn-cta-white:hover { background: #f0f4ff; color: #122d56; }
+  .btn-cta-outline {
+    background: transparent; color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    padding: 12px 26px; border-radius: 8px;
+    font-size: 14.5px; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; transition: all .2s;
+    text-decoration: none;
+  }
+  .btn-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); color: #fff; }
+
+  .cta-info-item {
+    display: flex; align-items: center; gap: 12px;
+    color: rgba(255,255,255,0.85);
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .cta-info-icon {
+    width: 42px; height: 42px; flex-shrink: 0;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    color: #1a3a6b; font-size: 17px;
+    font-size: 18px; color: #fff;
   }
-  .cinfo-text strong { font-size: 14px; display: block; font-weight: 700; color: #111827; }
-  .cinfo-text span   { font-size: 13px; color: #6b7280; line-height: 1.5; }
-  .enquiry-card {
-    background: #fff; border-radius: 14px;
-    padding: 28px 24px; border: 1px solid #e5e7eb;
-    border: 1px solid #a5a12a99;
+  .cta-info-label { font-size: 12px; color: rgba(255,255,255,0.5); display: block; }
+  .cta-info-value { font-size: 14px; font-weight: 600; color: #fff; display: block; }
+
+  /* ── CTA STATS GRID ── */
+  .cta-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
-  .enquiry-card h5 { font-weight: 700; font-size: 19px; margin-bottom: 4px; color: #111827; }
-  .enq-sub { font-size: 13px; color: #9ca3af; margin-bottom: 22px; }
-  .form-label-e { font-size: 13.5px; font-weight: 600; color: #374151; margin-bottom: 6px; display: block; }
-  .form-inp {
-    width: 100%; border: 1.5px solid #e5e7eb;
-    border-radius: 8px; padding: 4px 14px;
-    font-size: 14px; color: #111827; background: #fff;
-    transition: border-color .18s, box-shadow .18s; outline: none;
+  .cta-stat-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+    transition: background .2s;
   }
-  .form-inp::placeholder { color: #c0c7d0; }
-  .form-inp:focus { border-color: #1a3a6b; box-shadow: 0 0 0 3px rgba(26,58,107,0.08); }
-  textarea.form-inp { resize: vertical; min-height: 110px; }
-  .btn-send {
-    width: 100%; padding: 6px;
-    background: #1a3a6b; color: #fff;
-    border: none; border-radius: 9px;
-    font-size: 15px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    cursor: pointer; transition: background .2s;
+  .cta-stat-card:hover { background: rgba(255,255,255,0.13); }
+  .cta-stat-icon {
+    font-size: 22px; color: rgba(255,255,255,0.75);
+    margin-bottom: 10px;
   }
-  .btn-send:hover { background: #122d56; }
+  .cta-stat-num {
+    font-size: 28px; font-weight: 800;
+    color: #fff; line-height: 1;
+    letter-spacing: -1px; margin-bottom: 6px;
+  }
+  .cta-stat-label {
+    font-size: 12.5px; color: rgba(255,255,255,0.55);
+    font-weight: 500; line-height: 1.4;
+  }
 
   /* ── SCROLL REVEAL ── */
   .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
@@ -245,86 +300,15 @@
     .stat-num { font-size: 24px; }
     .quick-card { width: 100%; padding: 20px 16px 18px; }
     .qs-item { padding: 12px; }
+    .cta-sub { font-size: 14px; }
   }
   @media (max-width: 480px) {
     .hero-title { font-size: 28px; }
     .hero-badge { font-size: 12px; }
     .stat-num { font-size: 22px; }
     .quick-card-title { font-size: 16px; }
+    .cta-section { padding: 52px 0; }
   }
-
-  /* ── CONTACT RESPONSIVE FIXES ── */
-  @media (max-width: 991px) {
-    .contact-info-card {
-      height: auto;
-      padding: 20px 20px;
-    }
-    .enquiry-card {
-      padding: 22px 18px;
-    }
-  }
-
-  @media (max-width: 575px) {
-    .contact-section { padding: 40px 0; }
-
-    .contact-info-card {
-      padding: 18px 16px;
-      border-radius: 14px;
-    }
-    .contact-info-card h5 { font-size: 15px; }
-    .cinfo-sub          { font-size: 12px; margin-bottom: 18px; }
-
-    .cinfo-row          { gap: 10px; margin-bottom: 14px; }
-    .cinfo-icon         { width: 34px; height: 34px; font-size: 14px; border-radius: 8px; }
-    .cinfo-text strong  { font-size: 13px; }
-    .cinfo-text span    { font-size: 12px; }
-
-    .enquiry-card       { padding: 18px 14px; border-radius: 12px; }
-    .enquiry-card h5    { font-size: 16px; }
-    .enq-sub            { font-size: 12px; margin-bottom: 16px; }
-
-    .form-label-e       { font-size: 13px; }
-    .form-inp           { font-size: 13px; padding: 8px 12px; }
-    textarea.form-inp   { min-height: 90px; }
-
-    .btn-send           { font-size: 14px; padding: 10px; }
-  }
-
-  @media (max-width: 360px) {
-    .contact-info-card,
-    .enquiry-card       { padding: 14px 12px; }
-    .cinfo-icon         { width: 30px; height: 30px; font-size: 13px; }
-  }
-
-  .quick-card-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.quick-card {
-    position: relative;
-    background: #fff;
-    border-radius: 18px;
-    padding: 25px;
-    z-index: 2;
-}
-
-/* Tilted shadow layer */
-.quick-card-wrapper::before {
-    content: "";
-    position: absolute;
-    top: 30px;
-    left: 28px;
-    width: 78%;
-    height: 85%;
-    background: #fff;
-    border-radius: 20px;
-    transform: rotate(-7deg);
-    z-index: 1;
-}
-
-/* Optional second layer for more depth */
-  
 </style>
 @endpush
 
@@ -361,7 +345,7 @@
             </a>
           @else
             <a href="{{ route('register') }}" class="btn-track">
-            Track Application
+              Track Application
             </a>
           @endauth
         </div>
@@ -384,8 +368,6 @@
       {{-- RIGHT — Quick Services Card --}}
       <div class="col-lg-7 d-flex align-items-center justify-content-end">
         <div class="quick-card-wrapper">
-          <!-- <div class="qc-blob qc-blob-1"></div>
-          <div class="qc-blob qc-blob-2"></div> -->
           <div class="quick-card">
             <div class="quick-card-title">Quick Services</div>
 
@@ -535,79 +517,66 @@
   </div>
 </section>
 
-{{-- ═══════════════ CONTACT ═══════════════ --}}
-<section class="contact-section" id="contact">
-  <div class="container">
-    <h2 style="font-weight:700;font-size:clamp(24px,4vw,34px);text-align:center;color:#111827;letter-spacing:-0.5px;">Contact Us</h2>
-    <p style="text-align:center;color:#6b7280;font-size:15px;margin-top:8px;margin-bottom:44px;">Get in touch with us for any queries or service requirements</p>
-    <div class="row g-4">
+{{-- ═══════════════ CTA BANNER ═══════════════ --}}
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="row align-items-center g-5">
 
-      {{-- Contact Info Card --}}
-      <div class="col-12 col-lg-5 reveal rd1">
-        <div class="contact-info-card">
-          <h5>Visit Our Center</h5>
-          <p class="cinfo-sub">We are here to help you with all services</p>
-
-          <div class="cinfo-row">
-            <div class="cinfo-icon"><i class="bi bi-geo-alt"></i></div>
-            <div class="cinfo-text">
-              <strong>Address</strong>
-              <span>Bhilwara<br>Rajasthan, India</span>
-            </div>
-          </div>
-          <div class="cinfo-row">
-            <div class="cinfo-icon"><i class="bi bi-telephone"></i></div>
-            <div class="cinfo-text">
-              <strong>Phone</strong>
-              <span>+91 7568359165</span>
-            </div>
-          </div>
-          <div class="cinfo-row">
-            <div class="cinfo-icon"><i class="bi bi-envelope"></i></div>
-            <div class="cinfo-text">
-              <strong>Email</strong>
-              <span style="word-break:break-all;">superamitt3107@gmail.com</span>
-            </div>
-          </div>
-          <div class="cinfo-row">
-            <div class="cinfo-icon"><i class="bi bi-clock"></i></div>
-            <div class="cinfo-text">
-              <strong>Working Hours</strong>
-              <span>Monday - Saturday: 9:00 AM - 7:00 PM<br>Sunday: Closed</span>
-            </div>
-          </div>
+      {{-- LEFT: Text + Buttons --}}
+      <div class="col-lg-7 reveal rd1">
+        <div class="cta-badge">
+          <i class="bi bi-lightning-charge-fill"></i>
+          Get Started Today
+        </div>
+        <h2 class="cta-title">
+          Ready to Apply for<br>Your Government Service?
+        </h2>
+        <p class="cta-sub">
+          Join thousands of satisfied citizens who trust D-Mitra for fast,
+          transparent, and hassle-free government document processing.
+          Register now and get started in minutes.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          @auth
+            <a href="{{ route('services.index') }}" class="btn-cta-white">
+              Browse Services <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="{{ route('user.dashboard') }}" class="btn-cta-outline">
+              <i class="bi bi-speedometer2"></i> My Dashboard
+            </a>
+          @else
+            <a href="{{ route('register') }}" class="btn-cta-white">
+              Register Free <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="{{ route('login') }}" class="btn-cta-outline">
+              <i class="bi bi-box-arrow-in-right"></i> Login
+            </a>
+          @endauth
         </div>
       </div>
 
-      {{-- Enquiry Form Card --}}
-      <div class="col-12 col-lg-7 reveal rd2">
-        <div class="enquiry-card">
-          <h5>Send Enquiry</h5>
-          <p class="enq-sub">Fill the form below and we will get back to you</p>
-          <div class="row g-3">
-            <div class="col-12 col-sm-6">
-              <label class="form-label-e">Full Name</label>
-              <input type="text" class="form-inp" placeholder="Enter your name"/>
-            </div>
-            <div class="col-12 col-sm-6">
-              <label class="form-label-e">Phone Number</label>
-              <input type="text" class="form-inp" placeholder="Enter phone number"/>
-            </div>
-            <div class="col-12">
-              <label class="form-label-e">Email Address</label>
-              <input type="email" class="form-inp" placeholder="Enter your email"/>
-            </div>
-            <div class="col-12">
-              <label class="form-label-e">Service Required</label>
-              <input type="text" class="form-inp" placeholder="e.g., Birth Certificate, Bank Account"/>
-            </div>
-            <div class="col-12">
-              <label class="form-label-e">Message</label>
-              <textarea class="form-inp" placeholder="Describe your requirements..."></textarea>
-            </div>
-            <div class="col-12">
-              <button class="btn-send"><i class="bi bi-send"></i> Send Enquiry</button>
-            </div>
+      {{-- RIGHT: Trust Stats --}}
+      <div class="col-lg-5 reveal rd2">
+        <div class="cta-stats-grid">
+          <div class="cta-stat-card">
+            <div class="cta-stat-icon"><i class="bi bi-file-earmark-check"></i></div>
+            <div class="cta-stat-num">50K+</div>
+            <div class="cta-stat-label">Applications Processed</div>
+          </div>
+          <div class="cta-stat-card">
+            <div class="cta-stat-icon"><i class="bi bi-patch-check"></i></div>
+            <div class="cta-stat-num">100%</div>
+            <div class="cta-stat-label">Government Authorized</div>
+          </div>
+          <div class="cta-stat-card">
+            <div class="cta-stat-icon"><i class="bi bi-emoji-smile"></i></div>
+            <div class="cta-stat-num">10K+</div>
+            <div class="cta-stat-label">Happy Customers</div>
+          </div>
+          <div class="cta-stat-card">
+            <div class="cta-stat-icon"><i class="bi bi-lightning-charge"></i></div>
+            <div class="cta-stat-num">24hr</div>
+            <div class="cta-stat-label">Average Processing</div>
           </div>
         </div>
       </div>
@@ -615,7 +584,6 @@
     </div>
   </div>
 </section>
-
 
 @endsection
 
@@ -641,9 +609,9 @@
         <ul style="list-style:none;padding:0;">
           <li style="margin-bottom:10px;"><a href="{{ route('home') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Home</a></li>
           <li style="margin-bottom:10px;"><a href="{{ route('services.index') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Services</a></li>
-          <li style="margin-bottom:10px;"><a href="contact" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Contact</a></li>
+          <li style="margin-bottom:10px;"><a href="{{ route('contact') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Contact</a></li>
           @guest
-          <li style="margin-bottom:10px;"><a href="{{ route('login') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Login</a></li>
+          <li style="margin-bottom:10px;"><a href="{{ route('login') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Login444444444</a></li>
           <li style="margin-bottom:10px;"><a href="{{ route('register') }}" style="color:#6b7280;text-decoration:none;font-size:13.5px;">Register</a></li>
           @endguest
         </ul>
