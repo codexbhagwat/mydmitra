@@ -25,19 +25,18 @@ class ServiceController extends Controller
             'name'        => 'required|string|max:150',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'icon'        => 'nullable|string|max:100',  // ✅ add validation
+            'icon'        => 'nullable|string|max:100',
         ]);
 
-    Service::create([
-        'name'           => $request->name,
-        // 'form_title'     => $request->form_title ?: $request->name,
-        'description'    => $request->description,
-        'price'          => $request->price ?? 0,
-        'icon'           => $request->icon ?: null,   // ✅ YE LINE ADD KARO
-        'is_active'      => $request->has('is_active') ? 1 : 0,
-        'fields_json'    => $request->fields,
-        'documents_json' => $request->required_documents,
-    ]);
+        Service::create([
+            'name'           => $request->name,
+            'description'    => $request->description,
+            'price'          => $request->price ?? 0,
+            'icon'           => $request->icon ?: null,
+            'is_active'      => $request->has('is_active') ? 1 : 0,
+            'fields_json'    => $request->input('fields_json'),    // ✅ SAHI NAME
+            'documents_json' => $request->input('documents_json'), // ✅ SAHI NAME
+        ]);
 
         return redirect()->route('admin.services.index')
                         ->with('success', 'Service created successfully.');
@@ -54,19 +53,18 @@ class ServiceController extends Controller
             'name'        => 'required|string|max:150',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'icon'        => 'nullable|string|max:100',  // ✅ add validation
+            'icon'        => 'nullable|string|max:100',
         ]);
 
-    $service->update([
-        'name'           => $request->name,
-        // 'form_title'     => $request->form_title ?: $request->name,
-        'description'    => $request->description,
-        'price'          => $request->price ?? 0,
-        'icon'           => $request->icon ?: null,   // ✅ YE LINE ADD KARO
-        'is_active'      => $request->has('is_active') ? 1 : 0,
-        'fields_json'    => $request->fields,
-        'documents_json' => $request->required_documents,
-    ]);
+        $service->update([
+            'name'           => $request->name,
+            'description'    => $request->description,
+            'price'          => $request->price ?? 0,
+            'icon'           => $request->icon ?: null,
+            'is_active'      => $request->has('is_active') ? 1 : 0,
+            'fields_json'    => $request->input('fields_json'),    // ✅ SAHI NAME
+            'documents_json' => $request->input('documents_json'), // ✅ SAHI NAME
+        ]);
 
         return redirect()->route('admin.services.index')
                         ->with('success', 'Service updated successfully.');
