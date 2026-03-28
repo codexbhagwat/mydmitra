@@ -194,14 +194,13 @@
       </a>
 
       {{-- Desktop Nav Links --}}
-      <div class="d-none d-lg-flex align-items-center gap-1">
-        <!-- <a href="{{ route('home') }}" class="nav-link">Home</a> -->
-        <a href="{{ route('services.index') }}" class="nav-link">Services</a>
-        <a href="#contact" class="nav-link">Government</a>
-        <a href="#contact" class="nav-link">Banking</a>
-          <a href="#contact" class="nav-link">Document</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
+<div class="d-none d-lg-flex align-items-center gap-1">
+    <a href="{{ route('services.index') }}" class="nav-link">Services</a>
+    <a href="{{ route('government.index') }}" class="nav-link">Government</a>        
+    <a href="{{ route('banking.index') }}" class="nav-link">Banking</a>
+    <a href="{{ route('document.index') }}" class="nav-link">Document</a>
+    <a href="{{ route('contact') }}" class="nav-link">Contact</a>
+</div>
 
       {{-- Desktop Auth Buttons --}}
       <div class="d-none d-lg-flex align-items-center gap-2">
@@ -311,7 +310,7 @@
         <ul>
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('services.index') }}">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('contact') }}">Contact</a></li>
           @guest
             <li><a href="{{ route('login') }}">Login</a></li>
             <li><a href="{{ route('register') }}">Register</a></li>
