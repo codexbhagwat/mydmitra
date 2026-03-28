@@ -72,8 +72,18 @@
                     <h5>Send Enquiry</h5>
                     <p class="enq-sub">Fill the form below and we will get back to you</p>
 
-                    <form action="{{ route('contact.submit') }}" method="POST" id="enquiryForm">
+                      <form action="{{ route('contact.submit') }}" method="POST" id="enquiryForm">
                         @csrf
+                        <div class="col-12">
+                        <label class="form-label-e">Please Choose Type</label>
+                        <select name="type" class="form-inp @error('type') is-invalid @enderror" required>
+                            <option value="" disabled {{ old('type') ? '' : 'selected' }}>Select type</option>
+                            <option value="enquiry"   {{ old('type') == 'enquiry'   ? 'selected' : '' }}>Enquiry</option>
+                            <option value="complaint" {{ old('type') == 'complaint' ? 'selected' : '' }}>Complaint</option>
+                            <option value="feedback"  {{ old('type') == 'feedback'  ? 'selected' : '' }}>Feedback</option>
+                        </select>
+                        @error('type')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
                         <div class="row g-3">
                             <div class="col-12 col-sm-6">
                                 <label class="form-label-e">Full Name</label>
