@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\GoogleAuthController; // ✅ Fix
+use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
@@ -73,14 +73,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-applications/{app}',     [ServiceController::class, 'applicationDetail'])->name('services.application');
 });
 
-// Goverment 
+// Goverment
 Route::get('/government-services', [GovernmentController::class, 'index'])->name('government.index');
 Route::get('/government/apply/{service}', [GovernmentController::class, 'apply'])->name('services.apply');
 Route::get('/contact', fn() => view('contact'))->name('contact');
 
-// Contact Routes
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+// // Contact Routes
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+// Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Banking page route
 Route::get('/banking', function () {
@@ -91,3 +91,7 @@ Route::get('/banking', function () {
 Route::get('/documents', function () {
     return view('document');
 })->name('document.index');
+
+
+Route::get('/contact',  [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
