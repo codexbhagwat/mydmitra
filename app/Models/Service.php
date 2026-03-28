@@ -25,8 +25,8 @@ protected $fillable = [
      * string and @foreach fails silently (or throws).
      */
 protected $casts = [
-    'fields_json'    => 'array', // ✅
-    'documents_json' => 'array', // ✅
+    'fields_json'    => 'json',  // ✅ 'array' ki jagah 'json' use karo
+    'documents_json' => 'json',  // ✅ string bhi handle karega, array bhi
     'price'          => 'decimal:2',
     'is_active'      => 'boolean',
 ];

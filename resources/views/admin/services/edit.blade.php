@@ -208,6 +208,12 @@
         </a>
     </div>
 
+    @if(session('success'))
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:#15803d;">
+            <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
+        </div>
+    @endif
+
     <form id="serviceForm" method="POST" action="{{ route('admin.services.update', $service) }}">
         @csrf
         @method('PUT')
@@ -227,16 +233,6 @@
                        placeholder="e.g. PAN Card Application" required>
                 @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
-
-            <!-- <div class="fg">
-                <label>Application form title
-                    <span class="hint">— heading shown on user's form</span>
-                </label>
-                <input type="text" name="form_title" id="formTitle"
-                       value="{{ old('form_title', $service->form_title) }}"
-                       placeholder="e.g. Apply for PAN Card">
-                @error('form_title')<div class="invalid-feedback">{{ $message }}</div>@enderror
-            </div> -->
 
             <div class="fg">
                 <label>Description</label>
@@ -264,11 +260,11 @@
                     <label class="status-row" for="isActive">
                         <div class="tog-wrap">
                             <input type="checkbox" name="is_active" id="isActive"
-                                   {{ $service->is_active ? 'checked' : '' }}>
+                                   {{ old('is_active', $service->is_active) ? 'checked' : '' }}>
                             <div class="tog-track"></div>
                         </div>
                         <div class="tog-txt">
-                            <strong id="statusLabel">{{ $service->is_active ? 'Active' : 'Inactive' }}</strong>
+                            <strong id="statusLabel">{{ old('is_active', $service->is_active) ? 'Active' : 'Inactive' }}</strong>
                             <span>Visible to users</span>
                         </div>
                     </label>
@@ -416,10 +412,39 @@
     </div>
 </div>
 
-{{-- Existing service data --}}
+{{-- ══ Existing service data passed from controller ══ --}}
+@php
+    // DB columns: fields_json / documents_json (seen in phpMyAdmin screenshot)
+    // Model may also expose them as: fields / required_documents via cast
+    $rawFields = $service->fields_json ?? $service->fields ?? null;
+
+    if (is_array($rawFields)) {
+        $jsFields = $rawFields;
+    } else {
+        $jsFields = json_decode($rawFields ?? '[]', true) ?? [];
+    }
+    // Handle double-encoded string
+    if (is_string($jsFields)) {
+        $jsFields = json_decode($jsFields, true) ?? [];
+    }
+
+    $rawDocs = $service->documents_json ?? $service->required_documents ?? null;
+
+    if (is_array($rawDocs)) {
+        $jsDocs = $rawDocs;
+    } else {
+        $jsDocs = json_decode($rawDocs ?? '[]', true) ?? [];
+    }
+    if (is_string($jsDocs)) {
+        $jsDocs = json_decode($jsDocs, true) ?? [];
+    }
+@endphp
 <script>
-    const existingFields = @json($service->fields ?? []);
-    const existingDocs   = @json($service->required_documents ?? []);
+    const existingFields = @json($jsFields);
+    const existingDocs   = @json($jsDocs);
+    // Debug: open browser console to verify data is loaded
+    console.log('Fields loaded:', existingFields);
+    console.log('Docs loaded:', existingDocs);
 </script>
 
 <script>
@@ -558,14 +583,21 @@ const FIELD_TYPES=[
 ];
 const DOC_TYPES=['PDF','Image (JPG/PNG)','PDF or Image','Any File'];
 
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-function typeOpts(sel='text'){return FIELD_TYPES.map(t=>`<option value="${t.v}"${t.v===sel?' selected':''}>${t.l}</option>`).join('');}
-function docOpts(sel='PDF'){return DOC_TYPES.map(t=>`<option${t===sel?' selected':''}>${t}</option>`).join('');}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function typeOpts(sel){
+    sel = sel || 'text';
+    return FIELD_TYPES.map(t=>`<option value="${t.v}"${t.v===sel?' selected':''}>${t.l}</option>`).join('');
+}
+function docOpts(sel){
+    sel = sel || 'PDF';
+    return DOC_TYPES.map(t=>`<option value="${t}"${t===sel?' selected':''}>${t}</option>`).join('');
+}
 
 function hideEmpty(id){const e=document.getElementById(id);if(e)e.style.display='none';}
 function checkEmpty(cid,eid,cls){const e=document.getElementById(eid);if(!e)return;e.style.display=document.querySelectorAll('#'+cid+' .'+cls).length?'none':'';}
 
-function addField(data={}){
+function addField(data){
+    data = data || {};
     hideEmpty('fieldsEmpty');
     fieldCount++;
     const n=fieldCount;
@@ -574,14 +606,14 @@ function addField(data={}){
     div.innerHTML=`
         <div>
             <div class="fi-lbl">Field label</div>
-            <input type="text" class="fi-inp field-label" placeholder="e.g. Full Name" value="${esc(data.label||'')}" required>
-            <input type="text" class="fi-inp sm field-placeholder" placeholder="Placeholder text (optional)" value="${esc(data.placeholder||'')}">
+            <input type="text" class="fi-inp field-label" placeholder="e.g. Full Name" value="${esc(data.label)}" required>
+            <input type="text" class="fi-inp sm field-placeholder" placeholder="Placeholder text (optional)" value="${esc(data.placeholder)}">
         </div>
         <div>
             <div class="fi-lbl">Field type</div>
-            <select class="fi-sel field-type">${typeOpts(data.type||'text')}</select>
+            <select class="fi-sel field-type">${typeOpts(data.type)}</select>
             <div class="req-chk">
-                <input type="checkbox" id="req${n}" class="field-required" ${data.required!==false?'checked':''}>
+                <input type="checkbox" id="req${n}" class="field-required" ${data.required !== false ? 'checked' : ''}>
                 <label for="req${n}">Required field</label>
             </div>
         </div>
@@ -592,7 +624,8 @@ function addField(data={}){
     document.getElementById('fieldsContainer').appendChild(div);
 }
 
-function addDoc(data={}){
+function addDoc(data){
+    data = data || {};
     hideEmpty('docsEmpty');
     docCount++;
     const n=docCount;
@@ -608,10 +641,10 @@ function addDoc(data={}){
         <div class="doc-body">
             <div>
                 <div class="fi-lbl">Document title</div>
-                <input type="text" class="fi-inp doc-name" placeholder="e.g. Aadhaar Card" value="${esc(data.name||'')}" required>
+                <input type="text" class="fi-inp doc-name" placeholder="e.g. Aadhaar Card" value="${esc(data.name)}" required>
                 <div style="margin-top:10px;">
                     <div class="fi-lbl">Accepted format</div>
-                    <select class="fi-sel doc-type">${docOpts(data.doctype||'PDF')}</select>
+                    <select class="fi-sel doc-type">${docOpts(data.doctype)}</select>
                 </div>
             </div>
             <div>
@@ -665,15 +698,14 @@ function openModal(){
     for(const f of fields)if(!f.label){alert('Please fill in all field labels.');return;}
     for(const d of docs)if(!d.name){alert('Please fill in all document names.');return;}
 
-    const name=document.getElementById('svcName').value;
-    const formTitle=document.getElementById('formTitle').value||name;
-    const price=document.getElementById('svcPrice').value;
-    const active=document.getElementById('isActive').checked;
-    const icon=document.getElementById('iconValue').value;
+    // ── FIX: removed reference to deleted #formTitle element
+    const name  = document.getElementById('svcName').value;
+    const price = document.getElementById('svcPrice').value;
+    const active= document.getElementById('isActive').checked;
+    const icon  = document.getElementById('iconValue').value;
 
     let html=`<div style="display:grid;gap:6px;">
         <div><strong>Service name:</strong> ${esc(name)}</div>
-        <div><strong>Form title:</strong> ${esc(formTitle)}</div>
         <div><strong>Price:</strong> ₹${parseFloat(price||0).toLocaleString('en-IN')}</div>
         <div><strong>Icon:</strong> <i class="bi ${icon}" style="margin-right:4px;color:#e07820;"></i>${icon}</div>
         <div><strong>Status:</strong> ${active?'<span style="color:#16a34a;font-weight:600;">● Active</span>':'<span style="color:#ef4444;font-weight:600;">● Inactive</span>'}</div>
@@ -698,23 +730,29 @@ function openModal(){
 function closeModal(){document.getElementById('confirmModal').classList.remove('open');}
 
 function submitForm(){
-    document.getElementById('fieldsJson').value=JSON.stringify(collectFields());
-    document.getElementById('documentsJson').value=JSON.stringify(collectDocs());
+    document.getElementById('fieldsJson').value    = JSON.stringify(collectFields());
+    document.getElementById('documentsJson').value = JSON.stringify(collectDocs());
     document.getElementById('serviceForm').submit();
 }
 
 document.getElementById('confirmModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-/* Pre-populate existing data */
-if(existingFields&&existingFields.length){
-    existingFields.forEach(f=>addField(f));
-}else{
-    addField();
-}
-if(existingDocs&&existingDocs.length){
-    existingDocs.forEach(d=>addDoc(d));
-}else{
-    addDoc();
-}
+/* ══════════════════════════════════════════════════════════
+   PRE-POPULATE existing data on page load
+   ── always show existing rows; only add blank row if nothing saved yet
+══════════════════════════════════════════════════════════ */
+(function initData(){
+    if(existingFields && existingFields.length > 0){
+        existingFields.forEach(function(f){ addField(f); });
+    }else{
+        addField();   // blank row for new service
+    }
+
+    if(existingDocs && existingDocs.length > 0){
+        existingDocs.forEach(function(d){ addDoc(d); });
+    }else{
+        addDoc();     // blank row for new service
+    }
+})();
 </script>
 @endsection
