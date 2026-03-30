@@ -10,13 +10,13 @@
         <h2 style="font-weight:700;font-size:clamp(24px,4vw,34px);text-align:center;color:#111827;letter-spacing:-0.5px;">Contact Us</h2>
         <p style="text-align:center;color:#6b7280;font-size:15px;margin-top:8px;margin-bottom:44px;">Get in touch with us for any queries or service requirements</p>
 
-        {{-- Success / Error Alerts --}}
+        <!-- {{-- Success / Error Alerts --}}
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show mx-auto mb-4" style="max-width:860px;" role="alert">
                 <i class="bi bi-check-circle me-2"></i> {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
-        @endif
+        @endif -->
         @if($errors->any())
             <div class="alert alert-danger alert-dismissible fade show mx-auto mb-4" style="max-width:860px;" role="alert">
                 <i class="bi bi-exclamation-circle me-2"></i> Please fix the errors below.

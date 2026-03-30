@@ -423,11 +423,11 @@
       <p>Fill in your details to get started</p>
     </div>
 
-    {{-- @if($errors->any())
-      <div class="flash-error">
-        <i class="bi bi-exclamation-circle-fill"></i> {{ $errors->first() }}
-      </div>
-    @endif --}}
+@if($errors->any())
+  <div class="flash-error">
+    <i class="bi bi-exclamation-circle-fill"></i> {{ $errors->first() }}
+  </div>
+@endif
 
     <!-- Demo error for preview -->
     <!-- <div class="flash-error">
