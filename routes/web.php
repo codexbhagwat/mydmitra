@@ -61,6 +61,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::post('services/{service}/toggle', [AdminServiceController::class, 'toggle'])
         ->name('services.toggle');
+
+    Route::get('/enquiries', [App\Http\Controllers\Admin\EnquiryController::class, 'index'])->name('enquiries.index');
 });
 
 // ── Service Routes

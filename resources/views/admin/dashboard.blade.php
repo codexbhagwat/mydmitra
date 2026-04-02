@@ -8,7 +8,7 @@
     <p style="color:var(--grey);font-size:13.5px;margin-top:3px;">Here's an overview of your applications and services.</p>
 </div>
 
-{{-- Stat Cards --}}
+{{-- Stat Cards Row 1 --}}
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="stat-card">
@@ -48,6 +48,7 @@
     </div>
 </div>
 
+{{-- Stat Cards Row 2 --}}
 <div class="row g-3 mb-4">
     <div class="col-sm-6 col-xl-3">
         <div class="stat-card">
@@ -67,10 +68,19 @@
             </div>
         </div>
     </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-envelope"></i></div>
+            <div>
+                <div class="stat-value">{{ $stats['total_enquiries'] }}</div>
+                <div class="stat-label">Total Enquiries</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {{-- Recent Applications --}}
-<div class="card">
+<div class="card mb-4">
     <div class="card-header-custom">
         <div>
             <h5>Recent Applications</h5>
@@ -97,4 +107,64 @@
         @endforelse
     </div>
 </div>
+
+{{-- Recent Contact Enquiries --}}
+<div class="card">
+    <div class="card-header-custom">
+        <div>
+            <h5>Recent Contact Enquiries</h5>
+            <p>Latest messages submitted by users</p>
+        </div>
+    </div>
+    <div class="card-body-custom">
+        @forelse($recentEnquiries as $enquiry)
+            <div class="app-row">
+                <div class="app-icon">
+                    <i class="bi bi-person-lines-fill"></i>
+                </div>
+                <div class="app-row-info">
+                    <div class="title" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                        {{ $enquiry->name }}
+                        @if($enquiry->service)
+                            <span style="
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 5px;
+                                font-size: 11.5px;
+                                font-weight: 500;
+                                padding: 3px 10px;
+                                border-radius: 20px;
+                                background: #E6F1FB;
+                                color: #0C447C;
+                                border: 0.5px solid #B5D4F4;
+                                white-space: nowrap;
+                            ">
+                                <span style="width:6px;height:6px;border-radius:50%;background:#378ADD;display:inline-block;flex-shrink:0;"></span>
+                                {{ $enquiry->service }}
+                            </span>
+                        @endif
+                    </div>
+                    <div class="meta">
+                        {{ $enquiry->phone }} &middot; {{ $enquiry->email }}
+                        &middot; {{ $enquiry->created_at->format('Y-m-d') }}
+                    </div>
+                    <div style="font-size:12.5px;color:#444;margin-top:2px;">
+                        {{ Str::limit($enquiry->message, 80) }}
+                    </div>
+                </div>
+                <span style="
+                    font-size:11px;
+                    padding:3px 10px;
+                    border-radius:20px;
+                    background:#e8f5e9;
+                    color:#2e7d32;
+                    white-space:nowrap;
+                ">{{ ucfirst($enquiry->type ?? 'enquiry') }}</span>
+            </div>
+        @empty
+            <p style="color:var(--grey);text-align:center;padding:30px 0;font-size:13.5px;">No enquiries yet.</p>
+        @endforelse
+    </div>
+</div>
+
 @endsection
