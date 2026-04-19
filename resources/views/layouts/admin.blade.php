@@ -13,69 +13,71 @@
 <body>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            <div class="brand-name">My<span>d</span>mitra</div>
-            <span class="brand-sub">Admin Panel</span>
-        </div>
-
-        <nav class="sidebar-nav">
-            <div class="nav-section-label">Main</div>
-            <a href="{{ route('admin.dashboard') }}"
-                class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="bi bi-grid-1x2"></i> Dashboard
-            </a>
-
-            <div class="nav-section-label" style="margin-top:10px">Manage</div>
-            <a href="{{ route('admin.users.index') }}"
-                class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
-                <i class="bi bi-people"></i> Users
-            </a>
-            <a href="{{ route('admin.services.index') }}"
-                class="nav-link {{ request()->routeIs('admin.services*') ? 'active' : '' }}">
-                <i class="bi bi-grid"></i> Services
-            </a>
-            <a href="{{ route('admin.applications.index') }}"
-                class="nav-link {{ request()->routeIs('admin.applications*') ? 'active' : '' }}">
-                <i class="bi bi-file-earmark-text"></i> Applications
-            </a>
-
-            {{-- ↓ YEH LINE ADD KARO ↓ --}}
-            <a href="{{ route('admin.enquiries.index') }}"
-                class="nav-link {{ request()->routeIs('admin.enquiries*') ? 'active' : '' }}">
-                <i class="bi bi-envelope"></i> Contact Enquiries
-            </a>
-
-            <div class="nav-section-label" style="margin-top:10px">Site</div>
-            <a href="{{ route('home') }}" class="nav-link" target="_blank">
-                <i class="bi bi-globe"></i> View Website
-            </a>
-
-
-        </nav>
-
-        <div class="sidebar-footer">
-            <div class="sidebar-user">
-                <div class="sidebar-avatar">
-                    @if(auth()->user()->avatar)
-                        <img src="{{ auth()->user()->avatar }}" alt="">
-                    @else
-                        {{ strtoupper(substr(auth()->user()->first_name, 0, 1)) }}
-                    @endif
-                </div>
-                <div class="sidebar-user-info">
-                    <span class="name">{{ auth()->user()->full_name }}</span>
-                    <span class="email">{{ Str::limit(auth()->user()->email, 22) }}</span>
-                </div>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <div class="brand-name">My<span>d</span>mitra</div>
+        <span class="brand-sub">Admin Panel</span>
+    </div>
+ 
+    <nav class="sidebar-nav">
+        <div class="nav-section-label">Main</div>
+        <a href="{{ route('admin.dashboard') }}"
+            class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <i class="bi bi-grid-1x2"></i> Dashboard
+        </a>
+ 
+        <div class="nav-section-label" style="margin-top:10px">Manage</div>
+        <a href="{{ route('admin.users.index') }}"
+            class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
+            <i class="bi bi-people"></i> Users
+        </a>
+        <a href="{{ route('admin.services.index') }}"
+            class="nav-link {{ request()->routeIs('admin.services*') ? 'active' : '' }}">
+            <i class="bi bi-grid"></i> Services
+        </a>
+        <a href="{{ route('admin.applications.index') }}"
+            class="nav-link {{ request()->routeIs('admin.applications*') ? 'active' : '' }}">
+            <i class="bi bi-file-earmark-text"></i> Applications
+        </a>
+        <a href="{{ route('admin.enquiries.index') }}"
+            class="nav-link {{ request()->routeIs('admin.enquiries*') ? 'active' : '' }}">
+            <i class="bi bi-envelope"></i> Contact Enquiries
+        </a>
+ 
+        {{-- ↓ NEW UPDATES — YEH ADD KIYA ↓ --}}
+        <a href="{{ route('admin.updates.index') }}"
+            class="nav-link {{ request()->routeIs('admin.updates*') ? 'active' : '' }}">
+            <i class="bi bi-megaphone"></i> New Updates
+        </a>
+ 
+        <div class="nav-section-label" style="margin-top:10px">Site</div>
+        <a href="{{ route('home') }}" class="nav-link" target="_blank">
+            <i class="bi bi-globe"></i> View Website
+        </a>
+    </nav>
+ 
+    <div class="sidebar-footer">
+        <div class="sidebar-user">
+            <div class="sidebar-avatar">
+                @if(auth()->user()->avatar)
+                    <img src="{{ auth()->user()->avatar }}" alt="">
+                @else
+                    {{ strtoupper(substr(auth()->user()->first_name, 0, 1)) }}
+                @endif
             </div>
-            <form method="POST" action="{{ route('logout') }}" class="mt-3">
-                @csrf
-                <button type="submit" class="btn-outline-orange w-100" style="font-size:12.5px;padding:7px 14px;">
-                    <i class="bi bi-box-arrow-right"></i> Sign Out
-                </button>
-            </form>
+            <div class="sidebar-user-info">
+                <span class="name">{{ auth()->user()->full_name }}</span>
+                <span class="email">{{ Str::limit(auth()->user()->email, 22) }}</span>
+            </div>
         </div>
-    </aside>
+        <form method="POST" action="{{ route('logout') }}" class="mt-3">
+            @csrf
+            <button type="submit" class="btn-outline-orange w-100" style="font-size:12.5px;padding:7px 14px;">
+                <i class="bi bi-box-arrow-right"></i> Sign Out
+            </button>
+        </form>
+    </div>
+</aside>
 
     <!-- MAIN CONTENT -->
     <div class="main-content">

@@ -20,6 +20,7 @@ class DashboardController extends Controller
             'in_progress'        => Application::where('status', 'in_progress')->count(),
             'pending'            => Application::where('status', 'pending')->count(),
             'total_enquiries'    => ContactEnquiry::count(), // <-- ADD THIS
+            'total_updates' => \App\Models\Update::count(),
         ];
 
         $recentApplications = Application::with(['user', 'service'])

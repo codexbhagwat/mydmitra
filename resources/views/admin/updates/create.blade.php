@@ -1,0 +1,108 @@
+@extends('layouts.admin')
+
+@section('title', 'New Update')
+@section('page-title', 'New Update')
+
+@section('content')
+<div class="mb-4">
+    <a href="{{ route('admin.updates.index') }}" style="color:var(--orange);font-size:13.5px;">
+        <i class="bi bi-arrow-left"></i> Back to Updates
+    </a>
+</div>
+
+<div class="card-box" style="max-width:820px;">
+    <h6 class="fw-semibold mb-4" style="color:var(--dark);">
+        <i class="bi bi-megaphone-fill" style="color:var(--orange);"></i>
+        Publish New Update
+    </h6>
+
+    <form action="{{ route('admin.updates.store') }}" method="POST">
+        @csrf
+
+        {{-- TITLE --}}
+        <div class="mb-4">
+            <label class="form-label fw-medium" style="font-size:13.5px;">
+                Update Title <span style="color:var(--orange);">*</span>
+            </label>
+            <input
+                type="text"
+                name="title"
+                value="{{ old('title') }}"
+                class="form-control @error('title') is-invalid @enderror"
+                placeholder="e.g. New service added — Passport Seva"
+                style="border-radius:8px;font-size:14px;"
+            >
+            @error('title')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        {{-- DESCRIPTION (CKEditor) --}}
+        <div class="mb-4">
+            <label class="form-label fw-medium" style="font-size:13.5px;">
+                Description <span style="color:var(--orange);">*</span>
+            </label>
+            <textarea
+                name="description"
+                id="ck-description"
+                class="form-control @error('description') is-invalid @enderror"
+                rows="8"
+                placeholder="Write your update here..."
+                style="border-radius:8px;font-size:14px;"
+            >{{ old('description') }}</textarea>
+            @error('description')
+                <div class="invalid-feedback d-block">{{ $message }}</div>
+            @enderror
+        </div>
+
+        {{-- STATUS --}}
+        <div class="mb-4">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox"
+                       id="is_active" name="is_active"
+                       {{ old('is_active', '1') ? 'checked' : '' }}>
+                <label class="form-check-label" for="is_active" style="font-size:13.5px;">
+                    Publish immediately (Active)
+                </label>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn-orange">
+                <i class="bi bi-send-fill"></i> Publish Update
+            </button>
+            <a href="{{ route('admin.updates.index') }}"
+               class="btn btn-outline-secondary" style="border-radius:8px;font-size:13.5px;">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+{{-- CKEditor 5 CDN --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#ck-description'), {
+            toolbar: {
+                items: [
+                    'heading', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', '|',
+                    'bulletedList', 'numberedList', '|',
+                    'link', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            },
+            placeholder: 'Write your update details here...'
+        })
+        .then(editor => {
+            // Sync CKEditor content to textarea on form submit
+            editor.ui.view.element.closest('form').addEventListener('submit', () => {
+                document.querySelector('#ck-description').value = editor.getData();
+            });
+        })
+        .catch(error => {
+            console.error('CKEditor error:', error);
+        });
+</script>
+@endsection

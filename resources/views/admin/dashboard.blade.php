@@ -77,6 +77,16 @@
             </div>
         </div>
     </div>
+    {{-- ↓ TOTAL UPDATES CARD ↓ --}}
+    <div class="col-sm-6 col-xl-3">
+        <div class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-megaphone"></i></div>
+            <div>
+                <div class="stat-value">{{ $stats['total_updates'] }}</div>
+                <div class="stat-label">Total Updates</div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {{-- Recent Applications --}}
