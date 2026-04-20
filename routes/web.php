@@ -16,6 +16,7 @@ use App\Http\Controllers\User\ApplicationController as UserApplication;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\UpdateController as AdminUpdate;
 
 // ── Frontend
 Route::get('/', [FrontendController::class, 'home'])->name('home');
@@ -61,6 +62,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::post('services/{service}/toggle', [AdminServiceController::class, 'toggle'])
         ->name('services.toggle');
+
+    Route::get('/enquiries', [App\Http\Controllers\Admin\EnquiryController::class, 'index'])->name('enquiries.index');
+
+    Route::resource('updates', AdminUpdate::class);
 });
 
 // ── Service Routes
@@ -95,3 +100,10 @@ Route::get('/documents', function () {
 
 Route::get('/contact',  [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+
+Route::get('/admin/file/{path}', function ($path) {
+    $fullPath = storage_path('app/private/' . $path);
+    if (!file_exists($fullPath)) abort(404);
+    return response()->file($fullPath);
+})->where('path', '.*')->middleware('auth');
