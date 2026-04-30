@@ -19,6 +19,11 @@ class ServiceController extends Controller
         return view('admin.services.create');
     }
 
+    public function show(Service $service)
+    {
+        return view('admin.services.show', compact('service'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -34,8 +39,8 @@ class ServiceController extends Controller
             'price'          => $request->price ?? 0,
             'icon'           => $request->icon ?: null,
             'is_active'      => $request->has('is_active') ? 1 : 0,
-            'fields_json'    => $request->input('fields_json'),    // ✅ SAHI NAME
-            'documents_json' => $request->input('documents_json'), // ✅ SAHI NAME
+            'fields_json'    => $request->input('fields_json'),
+            'documents_json' => $request->input('documents_json'),
         ]);
 
         return redirect()->route('admin.services.index')
@@ -62,12 +67,22 @@ class ServiceController extends Controller
             'price'          => $request->price ?? 0,
             'icon'           => $request->icon ?: null,
             'is_active'      => $request->has('is_active') ? 1 : 0,
-            'fields_json'    => $request->input('fields_json'),    // ✅ SAHI NAME
-            'documents_json' => $request->input('documents_json'), // ✅ SAHI NAME
+            'fields_json'    => $request->input('fields_json'),
+            'documents_json' => $request->input('documents_json'),
         ]);
 
         return redirect()->route('admin.services.index')
                         ->with('success', 'Service updated successfully.');
+    }
+
+    public function toggle(Service $service)
+    {
+        $service->update(['is_active' => !$service->is_active]);
+
+        $status = $service->is_active ? 'activated' : 'deactivated';
+
+        return redirect()->back()
+                         ->with('success', "Service \"{$service->name}\" has been {$status}.");
     }
 
     public function destroy(Service $service)
