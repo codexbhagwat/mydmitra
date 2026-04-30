@@ -21,11 +21,7 @@
     </a>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success mb-4">
-        <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
-    </div>
-@endif
+
 @if(session('error'))
     <div class="alert alert-danger mb-4">{{ session('error') }}</div>
 @endif
